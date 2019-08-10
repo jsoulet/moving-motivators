@@ -1,0 +1,26 @@
+$CARD_HEIGHT: 200px;
+$CARD_WIDTH: 200px;
+
+.card {
+  width: $CARD_WIDTH;
+  height: $CARD_HEIGHT;
+  border: 1px solid #353535;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.2rem;
+  background-color: lightcoral;
+  place-self: start stretch;
+}
+
+.description {
+  background-color: lightblue;
+  border-radius: 20px;
+  padding: 10px;
+  place-self: end center;
+}
