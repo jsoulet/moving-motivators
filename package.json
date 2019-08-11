@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
     "emotion": "^10.0.14",
     "eslint-config-airbnb": "^17.1.1",
     "node-sass": "^4.12.0",

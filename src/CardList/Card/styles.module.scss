@@ -24,3 +24,7 @@ $CARD_WIDTH: 200px;
   padding: 10px;
   place-self: end center;
 }
+
+.isBeingDragged {
+  opacity: 0;
+}
