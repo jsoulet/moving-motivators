@@ -9,15 +9,10 @@ const ItemType = {
   CARD: Symbol('card'),
 };
 
-const Card = ({
-  id,
-  title,
-  description,
-  image = '',
-  index,
-  moveCardAtIndex,
-}) => {
-  // warn: a card should not know it index
+const Card = ({ id, title, description, index, moveCardAtIndex }) => {
+  const image = require(`./images/${id}.png`);
+
+  // warn: a card should not know its index
   const ref = useRef(null);
   const [dragProps, drag] = useDrag({
     item: {
@@ -77,8 +72,10 @@ const Card = ({
       })}
     >
       <div className={styles.title}>{title}</div>
-      {/* <img src={image} alt={title} /> */}
-      <div className={styles.description}>{description}</div>
+      <div className={styles.content}>
+        {image && <img className={styles.image} src={image} alt={title} />}
+        <div className={styles.description}>{description}</div>
+      </div>
     </div>
   );
 };

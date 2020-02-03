@@ -1,13 +1,19 @@
 $CARD_HEIGHT: 200px;
-$CARD_WIDTH: 200px;
+$CARD_WIDTH: 220px;
 
 .card {
   width: $CARD_WIDTH;
-  height: $CARD_HEIGHT;
-  border: 1px solid #353535;
-  border-radius: 5px;
+  min-height: $CARD_HEIGHT;
+  border: 1px solid darkgray;
   margin: 5px;
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.content {
   display: flex;
   flex-direction: column;
 }
@@ -16,15 +22,30 @@ $CARD_WIDTH: 200px;
   font-size: 1.2rem;
   background-color: lightcoral;
   place-self: start stretch;
+  width: 100%;
+  padding-block: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
 }
 
 .description {
-  background-color: lightblue;
+  color: darken(darkgray, 30);
   border-radius: 20px;
   padding: 10px;
   place-self: end center;
 }
 
 .isBeingDragged {
-  opacity: 0;
+  //opacity: 0;
+  border: dashed 3px darkgray;
+  cursor: grabbing;
+  > * {
+    opacity: 0;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState, useCallback, useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -7,11 +8,11 @@ import cardListData from './cardListData';
 import styles from './styles.module.scss';
 
 const CardList = () => {
-  // eslint-disable-next-line
   const initialCardList = localStorage.getItem('cards')
     ? JSON.parse(localStorage.getItem('cards'))
     : cardListData;
   const [cards, setCards] = useState(initialCardList);
+
   const saveCards = useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
   }, [cards]);

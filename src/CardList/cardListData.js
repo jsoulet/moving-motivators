@@ -1,66 +1,59 @@
 export default [
   {
     id: 'status',
-    title: 'Status',
+    title: 'Statut',
     description:
-      'My position is good, and decognize by the people who work with me',
-    image: './images/blank.jpg',
+      'Ma position est bonne et reconnue par les gens qui travaillent avec moi',
   },
   {
     id: 'acceptance',
-    title: 'Acceptance',
-    description: 'The people around me approve of what I do and who I am',
-    image: './images/blank.jpg',
+    title: 'Acceptation',
+    description:
+      'Les gens autour de moi approuvent ce que je fais et qui je suis',
   },
   {
     id: 'order',
-    title: 'Order',
-    description: 'There are enough rules and policies for a stable environment',
+    title: 'Ordre',
+    description:
+      'Il y a suffisamment de règles et de politiques pour me fournir un environnement stable',
   },
   {
     id: 'freedom',
-    title: 'Freedom',
+    title: 'Liberté',
     description:
-      'I am independent for others with my own work and responsibilities',
-    image: './images/blank.jpg',
+      'Je suis autonome sur mon propre travail et mes responsabilités',
   },
   {
     id: 'relatedness',
-    title: 'Relatedness',
-    description: 'I have good social contacts with the people around my work',
-    image: './images/blank.jpg',
+    title: 'Relations sociales',
+    description: 'J’ai un bon réseau social personnel et professionnel',
   },
   {
     id: 'honor',
-    title: 'Honor',
+    title: 'Honneur',
     description:
-      'My personal values are reflecred in the group and this boosts my loyalty',
-    image: './images/blank.jpg',
+      'Mes valeurs personnelles se retrouvent dans le groupe et cela augmente ma loyauté',
   },
   {
     id: 'mastery',
-    title: 'Mastery',
+    title: 'Maîtrise',
     description:
-      'my work challenges my competence but it is still within my abilities',
-    image: './images/blank.jpg',
+      'Mon travail challenge mes compétences mais reste dans le domaine de mes capacités',
   },
   {
     id: 'power',
     title: 'Power',
     description:
-      "There's enough room for me to influence what happens around me",
-    image: './images/blank.jpg',
+      'J’ai assez de possibilités pour influencer ce qui se passe autour de moi',
   },
   {
     id: 'goal',
-    title: 'Goal',
-    description: 'My purpouse in life is reflected in the work that I do',
-    image: './images/blank.jpg',
+    title: 'But',
+    description: 'Mon but dans la vie se reflète dans le travail que je fais',
   },
   {
     id: 'curiosity',
-    title: 'Curiosity',
-    description: 'I have plenty of things to investigate and to think about',
-    image: './images/blank.jpg',
+    title: 'Curiosité',
+    description: 'J’ai plein de choses à étudier et auxquelles penser',
   },
 ];
