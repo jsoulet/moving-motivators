@@ -1,20 +1,46 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, FunctionComponent } from 'react';
 import cn from 'classnames';
 
 import styles from './styles.module.scss';
 import { useDrag, useDrop } from 'react-dnd';
 
+import { IMoveCard } from '../types';
+
 const ItemType = {
   CARD: Symbol('card'),
 };
 
-const Card = ({ id, title, description, index, moveCardAtIndex }) => {
+interface DragObject {
+  id: string;
+  index: number;
+  type: symbol;
+  ref: any;
+}
+
+interface DragProps {
+  isBeingDragged: boolean;
+}
+
+interface CardProps {
+  id: string;
+  title: string;
+  description: string;
+  index: number;
+  moveCardAtIndex: IMoveCard;
+}
+
+const Card: FunctionComponent<CardProps> = ({
+  id,
+  title,
+  description,
+  index,
+  moveCardAtIndex,
+}) => {
   const image = require(`./images/${id}.png`);
 
   // warn: a card should not know its index
-  const ref = useRef(null);
-  const [dragProps, drag] = useDrag({
+  const ref = useRef<HTMLDivElement>(null);
+  const [dragProps, drag] = useDrag<DragObject, any, DragProps>({
     item: {
       id,
       ref,
@@ -27,31 +53,30 @@ const Card = ({ id, title, description, index, moveCardAtIndex }) => {
     // canDrag: () => id !== 'power',
   });
 
-  const [, drop] = useDrop({
+  const [, drop] = useDrop<DragObject, DragObject, DragObject>({
     accept: ItemType.CARD,
     hover: (item, monitor) => {
-      if (!ref.current) {
-        return;
-      }
       const dragIndex = item.index;
       const hoverIndex = index;
       // Do not drop an item on itself
       if (dragIndex === hoverIndex) {
         return;
       }
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleX =
-        (hoverBoundingRect.left + hoverBoundingRect.right) / 2;
+      if (!ref.current) {
+        return;
+      }
+      const dragBoundingRect = ref.current.getBoundingClientRect();
+      const hoverMiddleX = (dragBoundingRect.left + dragBoundingRect.right) / 2;
       const clientOffset = monitor.getClientOffset();
 
-      const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+      const hoverClientX = clientOffset!.x - dragBoundingRect.left;
 
       //const dragBoundingRect = item.ref.current.getBoundingClientRect();
       //const dragMiddleX = (dragBoundingRect.left - dragBoundingRect.right) / 2;
-      if (dragIndex < hoverIndex && hoverMiddleX < hoverClientX) {
-        return;
-      }
-      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
+      if (
+        (dragIndex < hoverIndex && hoverMiddleX < hoverClientX) ||
+        (dragIndex > hoverIndex && hoverClientX > hoverMiddleX)
+      ) {
         return;
       }
       moveCardAtIndex(dragIndex, hoverIndex);
@@ -78,14 +103,6 @@ const Card = ({ id, title, description, index, moveCardAtIndex }) => {
       </div>
     </div>
   );
-};
-
-Card.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string,
-  moveCardAtIndex: PropTypes.func.isRequired,
 };
 
 export default Card;

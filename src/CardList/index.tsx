@@ -7,17 +7,20 @@ import cardListData from './cardListData';
 
 import styles from './styles.module.scss';
 
+import { IMoveCard, ICard } from './types';
+
 const CardList = () => {
-  const initialCardList = localStorage.getItem('cards')
-    ? JSON.parse(localStorage.getItem('cards'))
+  const localCardList = localStorage.getItem('cards');
+  const initialCardList: ICard[] = localCardList
+    ? JSON.parse(localCardList)
     : cardListData;
   const [cards, setCards] = useState(initialCardList);
 
-  const saveCards = useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
   }, [cards]);
 
-  const moveCard = useCallback(
+  const moveCard = useCallback<IMoveCard>(
     (dragIndex, hoverIndex) => {
       const card = cards[dragIndex];
       const cardsClone = cards.slice();
@@ -37,7 +40,6 @@ const CardList = () => {
             index={index}
             id={id}
             moveCardAtIndex={moveCard}
-            saveCards={saveCards}
             {...props}
           />
         ))}

@@ -1,4 +1,6 @@
-export default [
+import { ICard } from './types';
+
+const cards: ICard[] = [
   {
     id: 'status',
     title: 'Statut',
@@ -57,3 +59,5 @@ export default [
     description: 'J’ai plein de choses à étudier et auxquelles penser',
   },
 ];
+
+export default cards;
