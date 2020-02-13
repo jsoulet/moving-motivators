@@ -4,6 +4,7 @@ import MultiBackend from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 import Card from './Card';
 import cardListData from './cardListData';
+import { getCardsOrder, saveCardsOrder } from './services'
 
 import styles from './styles.module.scss';
 
@@ -12,19 +13,12 @@ import { IMoveCard } from './types';
 const CardList = () => {
   const [cards, setCards] = useState(Object.keys(cardListData));
   useEffect(() => {
-    const localCardList = localStorage.getItem('cards');
-    if (!localCardList) {
-      return;
-    }
-    const parsedCardList = JSON.parse(localCardList);
-    if (!Array.isArray(parsedCardList) || parsedCardList.length === 0 || typeof parsedCardList[0] !== 'string') {
-      return;
-    }
-    setCards(parsedCardList);
+    const cardOrder = getCardsOrder()
+    setCards(cardOrder);
   }, []);
 
-  const saveCardOrder = useCallback(() => {
-    localStorage.setItem('cards', JSON.stringify(cards));
+  const handleSaveCardOrder = useCallback(() => {
+    saveCardsOrder(cards)
   }, [cards]);
 
   const moveCard = useCallback<IMoveCard>(
@@ -47,7 +41,7 @@ const CardList = () => {
             index={index}
             id={id}
             moveCardAtIndex={moveCard}
-            onDragEnd={saveCardOrder}
+            onDragEnd={handleSaveCardOrder}
             card={cardListData[id]}
           />
         ))}
