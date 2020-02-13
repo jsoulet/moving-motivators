@@ -16,7 +16,7 @@ const CardList = () => {
       return;
     }
     const parsedCardList = JSON.parse(localCardList);
-    if (!Array.isArray(parsedCardList) || parsedCardList.length === 0) {
+    if (!Array.isArray(parsedCardList) || parsedCardList.length === 0 || typeof parsedCardList[0] !== 'string') {
       return;
     }
     setCards(parsedCardList);
