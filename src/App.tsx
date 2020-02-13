@@ -1,10 +1,9 @@
 import React from 'react';
 import CardList from './CardList';
-import './App.css';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="bg-gray-200 font-sans leading-normal tracking-normal h-screen">
       <CardList />
     </div>
   );

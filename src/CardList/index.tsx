@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState, useCallback, useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -7,16 +6,23 @@ import cardListData from './cardListData';
 
 import styles from './styles.module.scss';
 
-import { IMoveCard, ICard } from './types';
+import { IMoveCard } from './types';
 
 const CardList = () => {
-  const localCardList = localStorage.getItem('cards');
-  const initialCardList: ICard[] = localCardList
-    ? JSON.parse(localCardList)
-    : cardListData;
-  const [cards, setCards] = useState(initialCardList);
-
+  const [cards, setCards] = useState(Object.keys(cardListData));
   useEffect(() => {
+    const localCardList = localStorage.getItem('cards');
+    if (!localCardList) {
+      return;
+    }
+    const parsedCardList = JSON.parse(localCardList);
+    if (!Array.isArray(parsedCardList) || parsedCardList.length === 0) {
+      return;
+    }
+    setCards(parsedCardList);
+  }, []);
+
+  const saveCardOrder = useCallback(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
   }, [cards]);
 
@@ -34,13 +40,14 @@ const CardList = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={styles.cardList}>
-        {cards.map(({ id, ...props }, index) => (
+        {cards.map((id, index) => (
           <Card
             key={id}
             index={index}
             id={id}
             moveCardAtIndex={moveCard}
-            {...props}
+            onDragEnd={saveCardOrder}
+            card={cardListData[id]}
           />
         ))}
       </div>

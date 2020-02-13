@@ -21,10 +21,12 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run watch:css & react-scripts start",
+    "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/styles/index.css -o src/index.css",
+    "watch:css": "postcss src/styles/index.css -o src/index.css -w"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^9.7.4",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-react-app": "^5.0.0",
@@ -50,6 +53,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
-    "prettier": "^1.18.2"
+    "postcss-cli": "^7.1.0",
+    "prettier": "^1.18.2",
+    "tailwindcss": "^1.2.0"
   }
 }

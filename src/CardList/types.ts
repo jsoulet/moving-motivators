@@ -3,9 +3,12 @@ export interface IMoveCard {
 }
 
 export interface ICard {
-  id: string;
   title: string;
   description: string;
+}
+
+export interface ICardData {
+  [key: string]: ICard;
 }
 
 export interface ISaveCards {
